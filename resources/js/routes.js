@@ -1,6 +1,7 @@
 
 let home = require('./components/home.vue').default;
 let login = require('./components/login.vue').default;
+let logout = require('./components/logout.vue').default;
 let register = require('./components/register.vue').default;
 let fourzerofour = require('./components/fourzerofour.vue').default;
 let dashboard = require('./components/dashboard.vue').default;
@@ -25,6 +26,11 @@ const routes =
             path: '/register', 
             component: register ,
             name: 'register' 
+        },
+        {
+            path : '/logout',
+            component : logout,
+            name : 'logout',
         },
         { 
             path: '*', 

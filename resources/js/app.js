@@ -1,6 +1,7 @@
 require('./bootstrap');
 import Vue from  'vue';
 
+
 //VueRouter Import
 
 import VueRouter from 'vue-router';
@@ -15,6 +16,12 @@ const router = new VueRouter({
 })
 
 //----------------------------
+
+//Import navbar
+
+Vue.component('navbar', require('./components/navbar.vue').default)
+
+//--
 
 
 //Import User Class
@@ -33,7 +40,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 1500,
+    timer: 3000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -51,7 +58,11 @@ window.Toast = Toast;
 
 
 Vue.config.productionTip =false;
+
 const app = new Vue({
     el: '#app',
+    components:{
+    
+    },  
     router
 });

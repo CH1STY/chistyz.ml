@@ -1,7 +1,9 @@
 <template>
    <div>
-            <div class="card mx-auto" style="width: 80%;">
-            <div class="card-body">
+            <navbar/>
+
+            <div class="card mx-auto bg-dark text-white" style="width: 80%;">
+            <div class="card-body ">
                 <h1 class="text-center">Registration Form</h1>
                 <form>
                     <div class="form-group">

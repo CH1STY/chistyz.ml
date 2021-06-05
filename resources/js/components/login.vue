@@ -1,17 +1,19 @@
 <template>
     <div >
-            <div class="card mx-auto" style="width: 80%;">
+            <navbar></navbar>
+            <div class="card mx-auto bg-dark text-white" style="width: 80%;">
             <div class="card-body">
                 <h1>Login Form</h1>
                 <form @submit.prevent="login">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control"  name="email" v-model="form.email"  placeholder="Enter email"/>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <input type="email" autocomplete="email" class="form-control"  name="email" v-model="form.email"  placeholder="Enter email"/>
+                        <small id="emailHelp" class="form-text text-danger" v-if="errors.email" >{{errors.email[0]}}</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1" name="password">Password</label>
-                        <input type="password"   v-model="form.password" class="form-control" placeholder="Password"/>
+                        <input type="password" autocomplete="current-password"   v-model="form.password" class="form-control" placeholder="Password"/>
+                        <small class="form-text text-danger" v-if="errors.password" >{{errors.password[0]}}</small>
                     </div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
@@ -42,6 +44,10 @@
                 form:{
                     email: null,
                     password: null,
+                },
+                errors:
+                {
+
                 }
             }
         },
@@ -56,10 +62,11 @@
                     })
                     this.$router.push({name:'dashboard'});   
                 })
-                .catch(error=> {
+                .catch(error=>{
+                    this.errors = error.response.data.errors;
                     Toast.fire({
                         icon: 'warning',
-                        title: 'Invalid Email or Password'
+                        title: 'Invalid Email or Password',
                     })
                 })
             }
