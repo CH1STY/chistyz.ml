@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Tymon\JWTAuth\facades\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWT
 {
