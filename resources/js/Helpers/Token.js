@@ -4,7 +4,7 @@ class Token{
        
         const payload= this.payload(token);
         if(payload){
-            if(payload.iss == "http://localhost:8000/api/auth/login" ||  payload.iss=="http://localhost:8000/api/auth/signup" || payload.iss=='http://chistyz.ml/api/auth/login' || payload.iss=='http://chistyz.ml/api/auth/signup' ){
+            if(payload.iss == "http://localhost:8000/api/auth/login" ||  payload.iss=="http://localhost:8000/api/auth/signup" || payload.iss=='https://www.chistyz.ml/api/auth/login' || payload.iss=='https://www.chistyz.ml/api/auth/signup' ){
 
                 return true;
 
