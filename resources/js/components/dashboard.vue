@@ -1,7 +1,7 @@
 <template>
     <div>
         <navbar/>
-        <h2>Welcome Users</h2>
+        <h2 class="text-center text-uppercase h3">Welcome {{username}}</h2>
     </div>
 </template>
 
@@ -17,8 +17,14 @@ export default {
             this.$router.push({name:'login'});
         }
     },
+    data(){
+        return{
+            username: localStorage.getItem('user'),
+        }
+    }
 }
 </script>
+    
 
 <style scoped>
 

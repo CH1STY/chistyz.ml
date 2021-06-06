@@ -49,12 +49,27 @@ class AuthController extends Controller
     {
         $validate = $request->validate([
             'email'=> 'required|email|unique:users,email|max:255',
-            'name' => 'required',
+            'name' => 'required|min:4|max:8|unique:users,name',
             'password' => 'required|min:6|confirmed',
         ]);
 
+        $lastUserId = User::orderby('user_id','desc')->first();
+
+        if($lastUserId)
+        {
+            $lastUserId = $lastUserId->user_id;
+            $lastUserId = intval(substr($lastUserId,1,5));
+            $lastUserId++;
+            $lastUserId = 'U'.$lastUserId;
+        }
+        else
+        {
+            $lastUserId = 'U10000';
+        }
+
         $user = new User;
         $user->name = $request->name;
+        $user->user_id = $lastUserId;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();

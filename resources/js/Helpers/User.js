@@ -52,6 +52,33 @@ class User{
         }
         return false;
     }
+
+    async isAdmin()
+    {
+        
+        const response = await axios({
+                method: 'post',
+                url: '/api/auth/me',
+                data: this.form,
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')} `
+                }
+            })
+        
+
+        const data = await response.data;
+          
+        if(data.name=='admin')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
 }
 
 export default User = new User();

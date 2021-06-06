@@ -6,13 +6,13 @@
                 <div class="carousel-item active">
                 <div class="carousel-caption d-none d-md-block">              
                 </div>
-                <img class="d-block w-100" :src="slider_images[0]" alt="First slide">
+                <img class="d-block w-100" src="asset/sliders/slider1.jpg" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" :src="slider_images[1]" alt="Second slide">
+                <img class="d-block w-100" src="asset/sliders/slider2.jpg" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" :src="slider_images[2]" alt="Third slide">
+                <img class="d-block w-100" src="asset/sliders/slider3.jpg" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -24,17 +24,20 @@
                 <span class="sr-only">Next</span>
             </a>
             </div>
+            
+            
+
     </div>
 </template>
 
 <script>
     export default{
         
-        mounted()
+        beforeCreate()
         {
-            axios.get('api/home-carousel')
-            .then(res=>this.slider_images= res.data)
-            .catch(error=>console.log(error))
+            // axios.get('api/home-carousel')
+            // .then(res=>this.slider_images= res.data)
+            // .catch(error=>console.log(error))
         },
         data(){
             return{

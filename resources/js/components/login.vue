@@ -3,7 +3,7 @@
             <navbar></navbar>
             <div class="card mx-auto bg-dark text-white" style="width: 80%;">
             <div class="card-body">
-                <h1>Login Form</h1>
+                <h1>Login </h1>
                 <form @submit.prevent="login">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
@@ -21,8 +21,9 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-
-                <router-link class="text-center text-info" to="register">Not A User?Click Here to SignUP</router-link>
+                
+                    <br/>
+                <router-link class="text-center mt-5 text-info " to="register">Not A User?Click Here to SignUP</router-link>
             </div>
             </div>
 
@@ -30,8 +31,11 @@
 </template>
 
 <script>
+
     export default{
-        
+        components:{
+           
+        },
         beforeCreate()
         {
             if(User.loggedIn())
@@ -69,7 +73,8 @@
                         title: 'Invalid Email or Password',
                     })
                 })
-            }
+            },
+            
         }
 
     }

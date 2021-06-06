@@ -13,41 +13,64 @@
                 <li v-if="isLoggedIn" class="nav-item">
                   <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
                 </li>
-                <li v-if="isLoggedIn" class="nav-item dropdown">
+                <li v-if="isAdmin" class="nav-item dropdown">
                   <span class="nav-link dropdown-toggle" to="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Product Management
                   </span>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <router-link class="dropdown-item" to="/admin/addProduct">Add Product</router-link>
-                    <router-link class="dropdown-item" to="/admin/viewProduct">View Products</router-link>
-                    <div class="dropdown-divider"></div>
-                    <router-link class="dropdown-item" to="/admin/deleteProduct">Delete Produtc</router-link>
+                  <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <router-link class=" text-secondary dropdown-item bg-dark" to="/admin/addProduct">Add Product</router-link>
+                    <router-link class=" text-secondary dropdown-item bg-dark" to="/admin/viewProduct">View Products</router-link>
                   </div>
                 </li>
-                
-                  <li v-if="isLoggedIn" class="nav-item" >
-                      <router-link class="nav-link" to="/admin/addNewCat">Add New Category</router-link>
-                  </li>
+                <li v-if="isAdmin" class="nav-item dropdown">
+                  <span class="nav-link dropdown-toggle" to="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Category Management
+                  </span>
+                  <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <router-link class=" text-secondary dropdown-item bg-dark" to="/admin/addCat">Add Category</router-link>
+                    <router-link class=" text-secondary dropdown-item bg-dark" to="/admin/viewCat">View Category</router-link>
+                  </div>
+                </li>
+                <li class="nav-item">
+                    <router-link v-if="isLoggedIn && !isAdmin" class="nav-link" to="/admin/viewCat">View Category</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link v-if="isLoggedIn && !isAdmin" class="nav-link" to="/admin/viewProduct">View Product</router-link>
+                </li>
+                  
                   <li v-if="isLoggedIn" class="nav-item">
                       <router-link class="nav-link" to="/logout">Logout</router-link>
                   </li>
                   <li v-else>
                     <router-link   class="nav-link" to="/login">Login</router-link>
                   </li>
+                  <li v-if="!isLoggedIn">
+                    <router-link class="nav-link" to="/register">Register</router-link>
+                  </li>
               </ul>
-              <form class="form-inline my-2 my-lg-0">
+              <div class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
+              </div>
             </div>
           </nav>
 </template>
 
 <script>
   export default{
+    mounted()
+    {
+      if(this.isLoggedIn)
+      {
+        User.isAdmin()
+        .then(res=>this.isAdmin=res)
+      }
+    }
+    ,
     data(){
       return{
         isLoggedIn: User.loggedIn(),
+        isAdmin : null,
       }
     },
   }
@@ -59,6 +82,6 @@
 
 <style scoped>
   .router-link-exact-active{
-      color:white !important;
+      color:#38C172 !important;
    }  
 </style>

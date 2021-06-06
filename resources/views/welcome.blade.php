@@ -19,7 +19,6 @@
 </head>
 <body class="bg-dark">
     <div id="app">
-      
         <div class="container-fluid bg-dark text-white" style="margin-top:70px">
             <router-view></router-view>
         </div>
