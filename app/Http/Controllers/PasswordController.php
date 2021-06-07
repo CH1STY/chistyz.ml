@@ -106,6 +106,7 @@ class PasswordController extends Controller
             $user = User::where('email',$tokenMail->email)->first();
             $user->password = Hash::make($request->password);
             $user->save();
+            $tokenMail->delete();
             return response('Success');
 
         }
