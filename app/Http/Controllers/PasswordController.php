@@ -34,31 +34,7 @@ class PasswordController extends Controller
                 $newToken->email = $request->email;
                 $newToken->token = bin2hex(random_bytes(16));
                 $newToken->save();
-                Mail::to('chistyz10@gmail.com')->send(new ChistyzMail([
-                    "header" => 'Password Reset Form',
-                    "body" => "<p>This is a Password Reset Request from Chistyz, Please Ignore If You didn't request this</p>
-                               <p> To Reset Password Clicks on the Button Below. Token Expiration Time is 5-6 mint </p>
-                               <br/>
-                               <a href='http://localhost:8000/reset-password/$newToken->token'><button style='background-color: #4CAF50; /* Green */
-                               border: none;
-                               color: white;
-                               padding: 15px 32px;
-                               text-align: center;
-                               text-decoration: none;
-                               display: inline-block;
-                               font-size: 16px;'>LocalHost</button></a>
-                               <br/>
-                               <a href='https://www.chistyz.ml/reset-password/$newToken->token'><button style='background-color: red; /* Green */
-                               border: none;
-                               color: white;
-                               padding: 15px 32px;
-                               text-align: center;
-                               text-decoration: none;
-                               display: inline-block;
-                               margin-top:20px;
-                               font-size: 16px;'>LiveServer</button></a>
-                                "
-                ]));
+                $this.sendMail($newToken);
                 return response('Success');
             }
             
@@ -70,6 +46,7 @@ class PasswordController extends Controller
             $newToken->email = $request->email;
             $newToken->token = bin2hex(random_bytes(16));
             $newToken->save();
+            $this.sendMail($newToken);
             return response('Success');
         }
 
@@ -134,5 +111,34 @@ class PasswordController extends Controller
         }
 
 
+    }
+    
+    private function sendMail($newToken)
+    {
+        Mail::to('chistyz10@gmail.com')->send(new ChistyzMail([
+            "header" => 'Password Reset Form',
+            "body" => "<p>This is a Password Reset Request from Chistyz, Please Ignore If You didn't request this</p>
+                       <p> To Reset Password Clicks on the Button Below. Token Expiration Time is 5-6 mint </p>
+                       <br/>
+                       <a href='http://localhost:8000/reset-password/$newToken->token'><button style='background-color: #4CAF50; /* Green */
+                       border: none;
+                       color: white;
+                       padding: 15px 32px;
+                       text-align: center;
+                       text-decoration: none;
+                       display: inline-block;
+                       font-size: 16px;'>LocalHost</button></a>
+                       <br/>
+                       <a href='https://www.chistyz.ml/reset-password/$newToken->token'><button style='background-color: red; /* Green */
+                       border: none;
+                       color: white;
+                       padding: 15px 32px;
+                       text-align: center;
+                       text-decoration: none;
+                       display: inline-block;
+                       margin-top:20px;
+                       font-size: 16px;'>LiveServer</button></a>
+                        "
+        ]));
     }
 }
