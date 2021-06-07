@@ -67,7 +67,7 @@ class User{
         
 
         const data = await response.data;
-          
+        localStorage.setItem('user',data.name);
         if(data.name=='admin')
         {
             return true;

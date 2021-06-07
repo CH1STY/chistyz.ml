@@ -50,7 +50,7 @@ class AuthController extends Controller
         $validate = $request->validate([
             'email'=> 'required|email|unique:users,email|max:255',
             'name' => 'required|min:4|max:8|unique:users,name',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|confirmed|max:50',
         ]);
 
         $lastUserId = User::orderby('user_id','desc')->first();

@@ -34,6 +34,22 @@ Route::group([
 
 });
 
+Route::group([
+
+'middleware' => 'api',
+'prefix' => 'user'
+
+], function () {
+
+
+    Route::post('addTodo','UserController@addTodo');
+    Route::get('getTodo','UserController@getTodo');
+
+    
+
+
+});
+
 
 
 Route::get('home-carousel','HomeController@getCarousel');

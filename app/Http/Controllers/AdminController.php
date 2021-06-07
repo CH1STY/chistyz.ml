@@ -18,8 +18,8 @@ class AdminController extends Controller
     {
 
         $valid = $request->validate([
-            'name' =>'required|regex:/^[\pL\s\-]+$/u',
-            'details'=>'required',
+            'name' =>'required|regex:/^[\pL\s\-]+$/u|min:4|max:12',
+            'details'=>'required|min:4|max:50',
         ]);
 
         if($this->guard()->user()->name =='admin')
@@ -114,8 +114,8 @@ class AdminController extends Controller
         if($this->guard()->user()->name =='admin')
         {
             $valid = $request->validate([
-                'name' =>'required|regex:/^[\pL\s\-]+$/u',
-                'details'=>'required',
+                'name' =>'required|regex:/^[\pL\s\-]+$/u|min:4|max:12',
+                'details'=>'required|min:4|max:50',
             ]);
 
             $category = Category::where('category_id',$id)->first();
