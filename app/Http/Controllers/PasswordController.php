@@ -113,7 +113,7 @@ class PasswordController extends Controller
 
     }
     
-    private function sendMail($newToken)
+    protected function sendMail($newToken)
     {
         Mail::to('chistyz10@gmail.com')->send(new ChistyzMail([
             "header" => 'Password Reset Form',
