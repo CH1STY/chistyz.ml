@@ -8,6 +8,8 @@ let dashboard = require('./components/dashboard.vue').default;
 let addCat = require('./components/Category/categoryAdd').default;
 let viewCat = require('./components/Category/categoryView').default;
 let editCat = require('./components/Category/categoryEdit').default;
+let forget_pass = require('./components/ForgetPass/forget-pass').default;
+let reset_pass = require('./components/ForgetPass/reset-pass').default;
 const routes = 
     [
         { 
@@ -49,6 +51,18 @@ const routes =
             path : '/admin/editCat/:catId',
             component: editCat,
             name : 'editCat',
+        },
+        {
+            path : '/forget-password',
+            component : forget_pass,
+            name : 'forget_pass',
+
+        },
+        {
+            path : '/reset-password/:token',
+            component : reset_pass,
+            name : 'reset_pass',
+
         },
         { 
             path: '*', 

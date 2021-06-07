@@ -23,6 +23,8 @@
                 </form>
                 
                     <br/>
+                <router-link class="text-center mt-5 text-danger " :to="{name:'forget_pass'}">Forget Your Password?</router-link>
+                <br>
                 <router-link class="text-center mt-5 text-info " to="register">Not A User?Click Here to SignUP</router-link>
             </div>
             </div>
