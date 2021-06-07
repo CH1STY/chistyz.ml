@@ -66,7 +66,6 @@ class PasswordController extends Controller
         }
         else
         {
-            $prev->delete();
             $newToken = new PasswordReset;
             $newToken->email = $request->email;
             $newToken->token = bin2hex(random_bytes(16));

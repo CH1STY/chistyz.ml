@@ -75,7 +75,6 @@
                         title: 'Invalid Email',
                     })
                     this.pressed = false;
-
                 })               
             }
         }
