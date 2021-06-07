@@ -8,6 +8,9 @@
     
     <title>LaraVue</title>
     <style>
+        body{
+            margin-bottom: 5px;
+        }
         footer{
             margin-top: auto;
             background: rgb(0, 0, 0);
@@ -15,11 +18,12 @@
             color: white;
             font-size: 12px;
         }
+        
     </style>
 </head>
 <body class="bg-dark">
     <div id="app">
-        <div class="container-fluid bg-dark text-white" style="margin-top:70px">
+        <div class="bg-dark text-white" style="margin-top:70px">
             <router-view></router-view>
         </div>
     </div>

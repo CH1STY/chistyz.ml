@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div class="container-fluid " >
         <navbar/>
         <router-link to="/">
             <div class="container">

@@ -74,6 +74,27 @@ class UserController extends Controller
         }
     }
 
+    public function deleteTodo(Request $request,$id)
+    {
+        if($this->guard()->user() != null)
+        {
+            $todo = Todo::where('user_id',$this->guard()->user()->user_id)->where('id',$id)->first();
+            if($todo)
+            {
+                $todo->delete();
+                return response('Success');
+            }
+            else
+            {
+                return response('failed',401);
+            }
+        }
+        else
+        {
+            return response('failed',401);
+        }
+    }
+
     //gaurd func
 
     public function guard()

@@ -2362,6 +2362,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2381,12 +2388,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         title: null,
-        details: null,
+        details: "",
         date: null
       },
       todos: {},
       username: localStorage.getItem('user'),
-      errors: {}
+      errors: {},
+      charcount: "Remaining 50",
+      isExceedChar: false
     };
   },
   methods: {
@@ -2421,7 +2430,7 @@ __webpack_require__.r(__webpack_exports__);
           });
           _this2.form.title = null;
           _this2.form.date = null;
-          _this2.form.details = null;
+          _this2.form.details = "";
           _this2.errors = {};
 
           _this2.getTodo();
@@ -2438,6 +2447,50 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Invalid'
         });
       });
+    },
+    deleteTodo: function deleteTodo(id, title) {
+      var _this3 = this;
+
+      Swal.fire({
+        title: "Delete Todo \"".concat(title, "\""),
+        text: "This Action Can't be Reverted",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios({
+            method: 'post',
+            url: "/api/user/deleteTodo/".concat(id),
+            headers: {
+              'Authorization': "Bearer ".concat(localStorage.getItem('token'), " ")
+            }
+          }).then(function (res) {
+            if (res.data == 'Success') {
+              _this3.getTodo();
+
+              Swal.fire('Deleted!', "Todo \"".concat(title, "\" Deleted"), 'success');
+            }
+          });
+        }
+      });
+    },
+    dateBeauty: function dateBeauty(datestring) {
+      var date = new Date(datestring);
+      return String(date).substr(0, 24);
+    },
+    recount: function recount() {
+      var strlen = this.form.details.length;
+
+      if (strlen > 50) {
+        this.charcount = "Exceeds " + (50 - strlen) + " Character";
+        this.isExceedChar = true;
+      } else {
+        this.charcount = "Remaining " + (50 - strlen);
+        this.isExceedChar = false;
+      }
     }
   }
 });
@@ -2795,6 +2848,36 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7664,7 +7747,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.neonText[data-v-fa6affac] {\r\n    text-transform: uppercase;\r\n    color: rgb(0, 0, 0);\r\n    text-shadow:\r\n    0 0 7px #fff,\r\n    0 0 10px #fff,\r\n    0 0 21px #fff,\r\n    0 0 42px #0fa,\r\n    0 0 82px #0fa,\r\n    0 0 92px #0fa,\r\n    0 0 102px #0fa,\r\n    0 0 151px #0fa;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.neonText[data-v-fa6affac] {\r\n    text-transform: uppercase;\r\n    color: rgb(0, 0, 0);\r\n    text-shadow:\r\n    0 0 7px #fff,\r\n    0 0 10px #fff,\r\n    0 0 21px #fff,\r\n    0 0 42px #0fa,\r\n    0 0 82px #0fa,\r\n    0 0 92px #0fa,\r\n    0 0 102px #0fa,\r\n    0 0 151px #0fa;\n}\n.about[data-v-fa6affac]{\r\n    margin-top:30px;\r\n    margin-bottom: 20px;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -43609,6 +43692,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container-fluid " },
     [
       _c("navbar"),
       _vm._v(" "),
@@ -43803,6 +43887,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container-fluid " },
     [
       _c("navbar"),
       _vm._v(" "),
@@ -43970,6 +44055,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container-fluid " },
     [
       _c("navbar"),
       _vm._v(" "),
@@ -44078,6 +44164,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container-fluid " },
     [
       _c("navbar"),
       _vm._v(" "),
@@ -44150,7 +44237,14 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Details")]),
+                    _c("label", [
+                      _vm._v("Details "),
+                      _c(
+                        "span",
+                        { class: { "text-danger": _vm.isExceedChar == true } },
+                        [_vm._v("(" + _vm._s(this.charcount) + ")")]
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -44163,6 +44257,7 @@ var render = function() {
                       ],
                       staticClass: "form-control",
                       attrs: {
+                        onChange: _vm.recount(),
                         type: "text",
                         name: "details",
                         placeholder: "Enter Details"
@@ -44254,11 +44349,70 @@ var render = function() {
             _vm._l(_vm.todos, function(todo) {
               return _c("div", { key: todo.id, staticClass: "card bg-dark " }, [
                 _c("div", { staticClass: "card-body greenBorder" }, [
-                  _c("h6", [_vm._v(_vm._s(todo.header))]),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "float-right",
+                      staticStyle: { display: "inline" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteTodo(todo.id, todo.header)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "bi bi-trash-fill",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                width: "12px",
+                                height: "12px",
+                                fill: "currentColor",
+                                viewBox: "0 0 16 16"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(todo.details))]),
+                  _c("h6", [
+                    _c("span", { staticClass: "text-info" }, [
+                      _vm._v("Title: ")
+                    ]),
+                    _vm._v(_vm._s(todo.header))
+                  ]),
                   _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(todo.todo_date))])
+                  _c("p", [
+                    _c("span", { staticClass: "text-warning" }, [
+                      _vm._v("Details: ")
+                    ]),
+                    _vm._v(_vm._s(todo.details))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("span", { staticClass: "text-success" }, [
+                      _vm._v("Date: ")
+                    ]),
+                    _vm._v(_vm._s(_vm.dateBeauty(todo.todo_date)))
+                  ])
                 ])
               ])
             })
@@ -44294,6 +44448,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container-fluid " },
     [
       _c("navbar"),
       _vm._v(" "),
@@ -46386,7 +46541,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("navbar"), _vm._v(" "), _vm._m(0)], 1)
+  return _c(
+    "div",
+    [
+      _c("navbar"),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2)
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -46466,6 +46633,87 @@ var staticRenderFns = [
         )
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "about", attrs: { id: "about" } }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            {
+              staticClass: "col-lg-6 order-1 order-lg-2 aos-init aos-animate",
+              attrs: { "data-aos": "fade-left" }
+            },
+            [
+              _c("img", {
+                staticClass: "img-fluid",
+                attrs: { src: "asset/about.jpg", alt: "" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content aos-init aos-animate",
+              attrs: { "data-aos": "fade-right" }
+            },
+            [
+              _c("h3", [
+                _vm._v(
+                  "Voluptatem dignissimos provident quasi corporis voluptates sit assumenda."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "fst-italic" }, [
+                _vm._v(
+                  "\n                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore\n                magna aliqua.\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("ul", [
+                _c("li", [
+                  _c("i", { staticClass: "bi bi-check-circle" }),
+                  _vm._v(
+                    " Ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("i", { staticClass: "bi bi-check-circle" }),
+                  _vm._v(
+                    " Duis aute irure dolor in reprehenderit in voluptate velit."
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("i", { staticClass: "bi bi-check-circle" }),
+                  _vm._v(
+                    " Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur."
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in\n                culpa qui officia deserunt mollit anim id est laborum\n                "
+                )
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", [_c("p", [_vm._v("CopyRightz By Chisty")])])
   }
 ]
 render._withStripped = true

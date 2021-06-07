@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container-fluid ">
         <navbar></navbar>
         <div class="card mx-auto bg-dark text-white overflow-auto">
                     <div class="card-body">

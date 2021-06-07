@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container-fluid ">
         <navbar/>
         <h1 class="text-center h3 m-2">ADD CATEGORY</h1>
 

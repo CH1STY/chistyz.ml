@@ -44,6 +44,7 @@ Route::group([
 
     Route::post('addTodo','UserController@addTodo');
     Route::get('getTodo','UserController@getTodo');
+    Route::post('deleteTodo/{id}','UserController@deleteTodo');
 
     
 

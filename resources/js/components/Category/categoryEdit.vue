@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container-fluid ">
         <navbar></navbar>
         <h4 v-if="!isFailed" class="text-center text-uppercase">EDIT CATEGORY {{catId}} </h4>
         <div v-if="!isFailed" class="row" style="margin:auto; width:60%;">
