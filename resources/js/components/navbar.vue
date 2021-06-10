@@ -10,9 +10,7 @@
                 <li class="nav-item">
                   <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
                 </li>
-                <li v-if="isLoggedIn" class="nav-item">
-                  <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
-                </li>
+               
                 <li v-if="isAdmin" class="nav-item dropdown">
                   <span class="nav-link dropdown-toggle" to="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Product Management
@@ -38,16 +36,22 @@
                     <router-link v-if="isLoggedIn && !isAdmin" class="nav-link" to="/admin/viewProduct">View Product</router-link>
                 </li>
                   
+                  <li v-if="isLoggedIn">
+                    <router-link class="nav-link" to="/todo">Todo App</router-link>
+                  </li>
                   <li v-if="isLoggedIn" class="nav-item">
                       <router-link class="nav-link" to="/logout">Logout</router-link>
                   </li>
                   <li v-else>
-                    <router-link   class="nav-link" to="/login">Login</router-link>
+                    <router-link class="nav-link" to="/login">Login</router-link>
                   </li>
                   <li v-if="!isLoggedIn">
                     <router-link class="nav-link" to="/register">Register</router-link>
                   </li>
               </ul>
+              <div class="form-inline my-2 my-lg-0">
+                <router-link :to="{name:'dashboard'}"><button  class="btn btn-outline-info my-2 mr-2 my-sm-0" type="submit">Profile</button></router-link>
+              </div>
               <div class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

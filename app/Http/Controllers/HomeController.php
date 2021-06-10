@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+//use Illuminate\Http\Request;
+use Request;
 class HomeController extends Controller
 {
     public function getCarousel()
@@ -12,5 +12,11 @@ class HomeController extends Controller
         $images[1] = asset('asset/sliders/slider2.jpg'); 
         $images[2] = asset('asset/sliders/slider3.jpg'); 
         return response($images);
+    }
+
+    public static function getIp()
+    {
+        $ip = Request::ip();
+        return response()->json($ip);
     }
 }

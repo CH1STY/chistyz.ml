@@ -5,6 +5,7 @@ let logout = require('./components/logout.vue').default;
 let register = require('./components/register.vue').default;
 let fourzerofour = require('./components/fourzerofour.vue').default;
 let dashboard = require('./components/dashboard.vue').default;
+let todo = require('./components/todo.vue').default;
 let addCat = require('./components/Category/categoryAdd').default;
 let viewCat = require('./components/Category/categoryView').default;
 let editCat = require('./components/Category/categoryEdit').default;
@@ -24,6 +25,11 @@ const routes =
             path: '/dashboard', 
             component: dashboard ,
             name: 'dashboard' 
+        },
+        {
+            path: '/todo',
+            component: todo,
+            name: 'todo'
         },
         { 
             path: '/login', 
