@@ -23,10 +23,10 @@
                     ip=res.data
                     axios({
                         method: 'GET',
-                        url:  `http://ip-api.com/json/${ip}`,
+                        url:  `https://ipapi.co/${ip}/json/`,
                     })
                     .then(res=>{
-                        console.log(res.data);
+                        this.cityname= res.city + " , "+ res.country_name;
                     })
 
                 });

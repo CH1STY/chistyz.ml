@@ -2560,14 +2560,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getCity_Country: function getCity_Country() {
+      var _this = this;
+
       var ip = "";
       axios.get('/api/client-ip').then(function (res) {
         ip = res.data;
         axios({
           method: 'GET',
-          url: "http://ip-api.com/json/".concat(ip)
+          url: "https://ipapi.co/".concat(ip, "/json/")
         }).then(function (res) {
-          console.log(res.data);
+          _this.cityname = res.city + " , " + res.country_name;
         });
       });
     }

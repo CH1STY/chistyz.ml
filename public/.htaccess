@@ -4,6 +4,14 @@
     </IfModule>
 
     RewriteEngine On
+    
+    #non www to www
+    #RewriteCond %{HTTP_HOST} ^chistyz.ml [NC]
+    #RewriteRule ^(.*)$ http://www.chistyz.ml/$1 [L,R=301]
+
+    #non https to https
+    #RewriteCond %{SERVER_PORT} 80
+    #RewriteRule ^(.*)$ https://www.chistyz.ml/$1 [R,L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
