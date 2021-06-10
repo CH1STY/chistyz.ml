@@ -2569,7 +2569,7 @@ __webpack_require__.r(__webpack_exports__);
           method: 'GET',
           url: "https://ipapi.co/".concat(ip, "/json/")
         }).then(function (res) {
-          _this.cityname = res.city + " , " + res.country_name;
+          _this.cityname = res.data.city + " , " + res.data.country_name;
         });
       });
     }

@@ -26,7 +26,7 @@
                         url:  `https://ipapi.co/${ip}/json/`,
                     })
                     .then(res=>{
-                        this.cityname= res.city + " , "+ res.country_name;
+                        this.cityname= res.data.city + " , "+ res.data.country_name;
                     })
 
                 });
