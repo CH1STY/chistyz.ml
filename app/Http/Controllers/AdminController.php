@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Category;
+use App\CategoryProduct;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,7 @@ class AdminController extends Controller
     {
 
         $valid = $request->validate([
-            'name' =>'required|regex:/^[\pL\s\-]+$/u|min:4|max:12',
+            'name' =>'required|regex:/^[\pL\s\-]+$/u|min:4|max:12|unique:categories,name',
             'details'=>'required|min:4|max:50',
         ]);
 
@@ -65,7 +66,7 @@ class AdminController extends Controller
 
     public function getCategory()
     {
-        $categories = Category::select('category_id','name','details')->get();
+        $categories = Category::select('category_id','name','details')->orderBy('created_at','desc')->paginate(4);
         return response()->json($categories);    
     }
 
@@ -74,13 +75,22 @@ class AdminController extends Controller
         if($this->guard()->user()->name =='admin')
         {
             $category = Category::where('category_id',$id)->first();
-            if($category->delete())
+            if($category)
             {
-                return response('success');
+                $relationDelete = CategoryProduct::where('category_id',$category->category_id)->delete();
+                if($category->delete())
+                {
+                    return response('success');
+                }
+                else
+                {
+                    return respose('failed');
+                }
+
             }
             else
             {
-                return respose('failed');
+                return response(['Invalid Access']);
             }
         }
         else
@@ -118,7 +128,31 @@ class AdminController extends Controller
                 'details'=>'required|min:4|max:50',
             ]);
 
+            //Editing Name Check
+            $nameCheck = Category::where('category_id','!=',$id)->get();
+            
+            foreach($nameCheck as $value)
+            {
+                if($value->name==$request->name)
+                {
+                    $arr =[
+                            "message" => "The given data was invalid.", 
+                            "errors" => [
+                                "name" => [
+                                    "The name has already been taken." 
+                                ]
+                            ]
+                    ];
+                    return response()->json($arr);
+                }
+            }
+            //------------
+            
+
             $category = Category::where('category_id',$id)->first();
+
+
+
             if($category)
             {
                 $category->name = $request->name;

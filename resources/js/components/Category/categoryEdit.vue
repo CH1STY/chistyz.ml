@@ -47,6 +47,10 @@
                 }
             });
             //--------------
+            if(!User.loggedIn())
+            {
+                this.$router.push({name:'login'});
+            }
         },
         data(){
             return {
@@ -120,6 +124,14 @@
 
                             this.$router.push({name:'viewCat'});
                             
+                        }
+                        else if(res.data.errors.name[0]=="The name has already been taken.")
+                        {
+                            this.errors = res.data.errors;
+                            Toast.fire({
+                                icon: 'warning',
+                                title: 'Invalid Entry or Access',
+                            })
                         }
                         else
                         {

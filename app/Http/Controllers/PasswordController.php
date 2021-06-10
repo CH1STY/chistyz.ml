@@ -12,9 +12,9 @@ class PasswordController extends Controller
 {
     public static function mailSend($newToken)
     {
-        Mail::to('chistyz10@gmail.com')->send(new ChistyzMail([
+        Mail::to($newToken->email)->send(new ChistyzMail([
             "header" => 'Password Reset Form',
-            "body" => "<p>This is a Password Reset Request from Chistyz, Please Ignore If You didn't request this</p>
+            "body" => "<p>This is a Password Reset Request from Chistyz for email '$newToken->email', Please Ignore If You didn't request this</p>
                        <p> To Reset Password Clicks on the Button Below. Token Expiration Time is 5-6 mint </p>
                        <br/>
                        <a href='http://localhost:8000/reset-password/$newToken->token'><button style='background-color: #4CAF50; /* Green */

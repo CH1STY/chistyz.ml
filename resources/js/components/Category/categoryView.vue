@@ -14,7 +14,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="category in categories" :key="category.category_id">
+                                <tr v-for="category in categories.data" :key="category.category_id">
                                     <td>{{category.category_id}}</td>
                                     <td>{{category.name}}</td>
                                     <td>{{category.details}}</td>
@@ -27,6 +27,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="card-footer">
+                        <pagination :data="categories" @pagination-change-page="getCat">
+                               
+                        </pagination>
                     </div>
                 </div>
     </div>
@@ -50,17 +55,17 @@
         },
         data(){
             return{
-                categories:[],
+                categories:{},
                 isAdmin:false,
             }
         },
         methods:
         {
-            getCat()
+            getCat(page=1)
             {
                 axios({
                     method: 'get',
-                    url: '/api/admin/getCat',
+                    url: `/api/admin/getCat?page=${page}`,
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')} `
                     }
@@ -108,5 +113,8 @@
 <style scoped>
 .table{
     table-layout:fixed;
+}
+.pagination{
+    justify-content: center;
 }
 </style>

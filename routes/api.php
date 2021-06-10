@@ -30,6 +30,9 @@ Route::group([
     Route::get('editCat/{id}','AdminController@editCategory');
     Route::post('editCat/{id}','AdminController@editCategoryVerify');
 
+    Route::get('category/fetchCat', 'UserController@fetchCat');
+    Route::resource('product', 'ProductController' );
+
 
 
 });

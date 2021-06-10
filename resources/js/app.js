@@ -1,6 +1,10 @@
 require('./bootstrap');
 import Vue from  'vue';
 
+//Importing Pagination
+Vue.component('pagination', require('laravel-vue-pagination'));
+//
+
 //Import Facebook Login
 //------
 

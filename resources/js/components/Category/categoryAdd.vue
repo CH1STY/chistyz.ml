@@ -19,13 +19,14 @@
                                         <small  class="form-text text-danger" v-if="errors.details" >{{errors.details[0]}}</small>
                                     </div>
                                 
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button v-if="!isRequested" type="submit" class="btn btn-primary">Add</button>
+                                    <div v-if="isRequested" class="loader"></div>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-sm">
-                <div class="card mx-auto bg-dark text-white overflow-auto">
+                <div class="card mx-auto bg-dark text-white overflow-auto" style="min-height:30rem;">
                     <div class="card-body">
                         <h4 class="text-center">Category List <router-link class="h6 float-right" to="/admin/viewCat">Click Here to Manage Category</router-link> </h4>
                         <table class="table bg-dark text-white">
@@ -37,13 +38,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="category in categories" :key="category.category_id">
+                                <tr v-for="category in categories.data" :key="category.category_id">
                                     <td>{{category.category_id}}</td>
                                     <td>{{category.name}}</td>
                                     <td>{{category.details}}</td>                                
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="card-footer text-center">
+                            <pagination :data="categories" @pagination-change-page="getCat">
+                               
+                            </pagination>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,6 +75,10 @@
              
             });
             //--------------
+            if(!User.loggedIn())
+            {
+                this.$router.push({name:'login'});
+            }
             
 
             
@@ -85,12 +95,14 @@
                 {
 
                 },
-                categories:{}
+                categories:{},
+                isRequested :false,
             }
         },
         methods:{
             submit()
             {
+                this.isRequested = true;
                 axios({
                     method: 'post',
                     url: '/api/admin/addCat',
@@ -118,7 +130,9 @@
                             icon: 'warning',
                             title: 'Invalid Entry or Access',
                         })
-                    } 
+                    }
+                    this.isRequested = false;
+
                 })
                 .catch(error=>{
                     this.errors = error.response.data.errors;
@@ -126,24 +140,33 @@
                         icon: 'warning',
                         title: 'Invalid Entry or Access',
                     })
+                    this.isRequested = false;
                 })
             },
-            getCat()
+            getCat(page = 1)
             {
                 axios({
                     method: 'get',
-                    url: '/api/admin/getCat',
+                    url: `/api/admin/getCat?page=${page}`,
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')} `
                     }
                 })
-                .then(res=>this.categories=res.data)
+                .then(res=>
+                    {
+                        this.categories=res.data
+                    }
+                )
             }
         }
     }
 </script>
 
 <style scoped>
+.pagination{
+    justify-content: center;
+}
+
 .card {
     max-height: 19rem;
 }

@@ -61,7 +61,7 @@ class User{
                 url: '/api/auth/me',
                 data: this.form,
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')} `
+                    'Authorization': `Bearer ${localStorage.getItem('token')} ` 
                 }
             })
         

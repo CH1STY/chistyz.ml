@@ -11,8 +11,9 @@
                         <input v-model="form.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                         <small v-if="errors.email" id="emailHelp" class="form-text text-danger">{{errors.email[0]}}</small>
                     </div>
-                    <div class="col-md-12 text-center">
-                        <button v-if="!pressed"  type="submit" class="text-center float-center btn btn-primary">REQUEST RESET</button>               
+                    <div class="col-md-12 text-center" style="display:flex;justify-content:center;">
+                        <button v-if="!pressed"  type="submit" class="text-center float-center btn btn-primary">REQUEST RESET</button>
+                        <div v-if="pressed" class="loader"></div>               
                     </div>
                 </form>
                 <div v-else>

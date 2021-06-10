@@ -10,6 +10,9 @@ let viewCat = require('./components/Category/categoryView').default;
 let editCat = require('./components/Category/categoryEdit').default;
 let forget_pass = require('./components/ForgetPass/forget-pass').default;
 let reset_pass = require('./components/ForgetPass/reset-pass').default;
+let addProduct = require('./components/Product/productAdd').default;
+let viewProduct = require('./components/Product/productView').default;
+let editProduct = require('./components/Product/productEdit').default;
 const routes = 
     [
         { 
@@ -36,6 +39,21 @@ const routes =
             path : '/logout',
             component : logout,
             name : 'logout',
+        },
+        {
+            path : '/admin/addProduct',
+            component : addProduct,
+            name : 'addProduct',
+        },
+        {
+            path : '/admin/viewProduct',
+            component : viewProduct,
+            name : 'viewProduct',
+        },
+        {
+            path : '/admin/editProduct/:productId',
+            component : editProduct,
+            name : 'editProduct',
         },
         {
             path : '/admin/addCat',

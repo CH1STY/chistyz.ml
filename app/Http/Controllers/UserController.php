@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Category;
 use App\Todo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -93,6 +94,12 @@ class UserController extends Controller
         {
             return response('failed',401);
         }
+    }
+
+    public function fetchCat()
+    {
+        $categories = Category::select('name','category_id')->get();
+        return response()->json($categories);
     }
 
     //gaurd func
