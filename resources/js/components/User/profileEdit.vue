@@ -43,7 +43,7 @@
                         
                         <button v-if="!isRequested" type="submit" class="btn btn-primary">Update</button>
                         <div v-if="isRequested" class="loader"></div>
-                        <router-link :to="{name:'viewProduct'}" class="btn btn-secondary float-right">Go Back</router-link>
+                        <router-link :to="{name:'dashboard'}" class="btn btn-secondary float-right">Go Back</router-link>
                 </form>                        
                 </div>
             </div>

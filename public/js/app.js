@@ -48700,7 +48700,7 @@ var render = function() {
                     "router-link",
                     {
                       staticClass: "btn btn-secondary float-right",
-                      attrs: { to: { name: "viewProduct" } }
+                      attrs: { to: { name: "dashboard" } }
                     },
                     [_vm._v("Go Back")]
                   )

@@ -166,7 +166,7 @@ class UserController extends Controller
          //Inserting Image
     
             $imageName = time().$userDetails->user_id.".".$request->image->getClientOriginalExtension();
-            $path = 'asset/user_image';
+            $path = 'asset/user_image/';
  
          //Resized Image
  
@@ -176,6 +176,11 @@ class UserController extends Controller
             $resized_image->resize(350,350);
             $resized_image->save(\public_path($path.$imageName));
          //
+         if($userDetails->image!='dummy.png')
+         {
+             $unlinkName = substr($userDetails->image,1);
+             unlink($unlinkName);
+         }
         $userDetails->image = '/'.$path.$imageName;
         if($userDetails->save())
         {
