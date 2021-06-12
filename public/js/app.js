@@ -48084,10 +48084,13 @@ var render = function() {
                     _vm._v(" "),
                     _vm.github
                       ? _c(
-                          "span",
+                          "a",
                           {
                             staticClass: "text-secondary",
-                            attrs: { id: "mywebsiteSpan" }
+                            attrs: {
+                              href: "https://" + _vm.github,
+                              id: "mywebsiteSpan"
+                            }
                           },
                           [_vm._v(_vm._s(_vm.github))]
                         )
@@ -48141,10 +48144,13 @@ var render = function() {
                     _vm._v(" "),
                     _vm.twitter
                       ? _c(
-                          "span",
+                          "a",
                           {
                             staticClass: "text-secondary",
-                            attrs: { id: "mywebsiteSpan" }
+                            attrs: {
+                              href: "https://" + _vm.twitter,
+                              id: "mywebsiteSpan"
+                            }
                           },
                           [_vm._v(_vm._s(_vm.twitter))]
                         )
@@ -48216,10 +48222,13 @@ var render = function() {
                     _vm._v(" "),
                     _vm.instagram
                       ? _c(
-                          "span",
+                          "a",
                           {
                             staticClass: "text-secondary",
-                            attrs: { id: "mywebsiteSpan" }
+                            attrs: {
+                              href: "https://" + _vm.instagram,
+                              id: "mywebsiteSpan"
+                            }
                           },
                           [_vm._v(_vm._s(_vm.instagram))]
                         )
@@ -48273,10 +48282,13 @@ var render = function() {
                     _vm._v(" "),
                     _vm.facebook
                       ? _c(
-                          "span",
+                          "a",
                           {
                             staticClass: "text-secondary",
-                            attrs: { id: "mywebsiteSpan" }
+                            attrs: {
+                              href: "https://" + _vm.facebook,
+                              id: "mywebsiteSpan"
+                            }
                           },
                           [_vm._v(_vm._s(_vm.facebook))]
                         )
