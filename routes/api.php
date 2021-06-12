@@ -48,7 +48,11 @@ Route::group([
     Route::post('addTodo','UserController@addTodo');
     Route::get('getTodo','UserController@getTodo');
     Route::post('deleteTodo/{id}','UserController@deleteTodo');
-
+    
+    Route::get('getUserId','UserController@getUserId');
+    Route::get('getUserDetails','UserController@getUserDetails');
+    Route::post('updateProfilePic','UserController@updateProfilePic');
+    Route::post('updateProfile','UserController@updateProfile');
     
 
 
@@ -61,3 +65,4 @@ Route::get('token-validation/{token}','PasswordController@tokenValidate');
 Route::get('home-carousel','HomeController@getCarousel');
 
 Route::get('client-ip','HomeController@getIp');
+

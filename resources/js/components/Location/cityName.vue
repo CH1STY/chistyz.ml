@@ -26,8 +26,13 @@
                         url:  `https://ipapi.co/${ip}/json/`,
                     })
                     .then(res=>{
-                        this.cityname= res.data.city + " , "+ res.data.country_name;
+                        this.cityname= res.data.postal+" , "+res.data.city + " , "+ res.data.region +" , "+res.data.country;
+                        if(res.data.city == undefined)
+                        {
+                            this.cityname = ""
+                        }
                     })
+                    .catch(err=>this.cityname="Please Turn off Adblocker")
 
                 });
             }

@@ -8,8 +8,13 @@
                 <form @submit.prevent="register">
                     <div class="form-group">
                         <label >Username</label>
-                        <input name="name" type="text" class="form-control" v-model="form.name"  aria-describedby="emailHelp" placeholder="Enter Name"/>
+                        <input name="name" type="text" class="form-control" v-model="form.name"  aria-describedby="emailHelp" placeholder="Enter username"/>
                         <small  class="form-text text-danger" v-if="errors.name" >{{errors.name[0]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label >Fullname</label>
+                        <input name="name" type="text" class="form-control" v-model="form.fullname"  aria-describedby="emailHelp" placeholder="Enter Full Name"/>
+                        <small  class="form-text text-danger" v-if="errors.fullname" >{{errors.fullname[0]}}</small>
                     </div>
                     <div class="form-group">
                         <label>Email address</label>
@@ -43,6 +48,7 @@
             return{
                 form:{
                     name: null,
+                    fullname: null,
                     email: null,
                     password: null,
                     password_confirmation: null

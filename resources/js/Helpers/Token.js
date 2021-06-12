@@ -25,6 +25,8 @@ class Token{
             }
             else
             {
+                localStorage.clear();
+                window.location.reload();
                 return false;
             }
 
@@ -35,15 +37,17 @@ class Token{
 
     payload(token)
     {
+        const payloadIntro = token.split('.')[0];
         const payload = token.split('.')[1];
-        return this.decode(payload);
+        return this.decode(payload,payloadIntro);
     }
 
-    decode(payload)
+    decode(payload,payloadIntro)
     {
         
         try{
-
+            
+            JSON.parse(atob(payloadIntro));
             return JSON.parse(atob(payload));
         }
         catch(err)

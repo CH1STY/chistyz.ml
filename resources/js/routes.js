@@ -14,6 +14,7 @@ let reset_pass = require('./components/ForgetPass/reset-pass').default;
 let addProduct = require('./components/Product/productAdd').default;
 let viewProduct = require('./components/Product/productView').default;
 let editProduct = require('./components/Product/productEdit').default;
+let editProfile = require('./components/User/profileEdit').default;
 const routes = 
     [
         { 
@@ -25,6 +26,11 @@ const routes =
             path: '/dashboard', 
             component: dashboard ,
             name: 'dashboard' 
+        },
+        { 
+            path: '/user/edit', 
+            component: editProfile ,
+            name: 'editProfile' 
         },
         {
             path: '/todo',
@@ -52,7 +58,7 @@ const routes =
             name : 'addProduct',
         },
         {
-            path : '/admin/viewProduct',
+            path : '/viewProduct',
             component : viewProduct,
             name : 'viewProduct',
         },

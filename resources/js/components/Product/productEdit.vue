@@ -71,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <h4 v-else class="text-danger text-center text-uppercase">Invalid Category Id</h4> 
+        <h4 v-else class="text-danger text-center text-uppercase">Invalid Product Id</h4> 
     </div>
 </template>
 

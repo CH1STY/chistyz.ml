@@ -74,6 +74,7 @@
                         icon: 'warning',
                         title: 'Invalid Email or Password',
                     })
+                    window.console.clear();
                 })
             },
             

@@ -1,12 +1,12 @@
 <template>
      <div class="container-fluid ">
         <navbar/>
-        <cityName/>
+        <profile/>
      </div>
 </template>
 
 <script>
-    import cityName from './Location/cityName.vue';
+    import profile from './User/profile.vue';
     export default{
         beforeCreate()
         {
@@ -24,7 +24,7 @@
             }
         },
         components:{
-            cityName,
+            profile
         }
         
     }

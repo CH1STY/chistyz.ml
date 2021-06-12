@@ -17,7 +17,7 @@
                   </span>
                   <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                     <router-link class=" text-secondary dropdown-item bg-dark" to="/admin/addProduct">Add Product</router-link>
-                    <router-link class=" text-secondary dropdown-item bg-dark" to="/admin/viewProduct">View Products</router-link>
+                    <router-link class=" text-secondary dropdown-item bg-dark" to="/viewProduct">View Products</router-link>
                   </div>
                 </li>
                 <li v-if="isAdmin" class="nav-item dropdown">
@@ -33,7 +33,7 @@
                     <router-link v-if="isLoggedIn && !isAdmin" class="nav-link" to="/admin/viewCat">View Category</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link v-if="isLoggedIn && !isAdmin" class="nav-link" to="/admin/viewProduct">View Product</router-link>
+                    <router-link v-if="isLoggedIn && !isAdmin" class="nav-link" to="/viewProduct">View Product</router-link>
                 </li>
                   
                   <li v-if="isLoggedIn">
@@ -87,6 +87,11 @@
 <style scoped>
   .router-link-exact-active{
       color:#38C172 !important;
+      
+   }  
+  .router-link-exact-active .btn{
+      background: #6CB2EB !important;
+      color: black;
    }  
 
   

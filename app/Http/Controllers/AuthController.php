@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UserDetails;
 
 class AuthController extends Controller
 {
@@ -49,7 +50,8 @@ class AuthController extends Controller
     {
         $validate = $request->validate([
             'email'=> 'required|email|unique:users,email|max:255',
-            'name' => 'required|min:4|max:8|unique:users,name',
+            'fullname' => 'required|regex:/^[a-zA-Z]+(?:\s[a-zA-Z]+)+$/|max:50|min:4',
+            'name' => 'required|min:4|max:15|unique:users,name|alpha_num',
             'password' => 'required|min:6|confirmed|max:50',
         ]);
 
@@ -72,6 +74,11 @@ class AuthController extends Controller
         $user->user_id = $lastUserId;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $userDetails = new UserDetails;
+        $userDetails->user_id = $user->user_id;
+        $userDetails->image = 'dummy.png';
+        $userDetails->fullname = $request->fullname;
+        $userDetails->save();
         $user->save();
 
         return $this->login($request);
@@ -123,7 +130,7 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => $this->guard()->factory()->getTTL() * 60,
             'name' => auth()->user()->name,
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->user()->user_id,
             'email' => auth()->user()->email,
         ]);
 

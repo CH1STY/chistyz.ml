@@ -5,7 +5,7 @@
 
         <div class="row ">
             <div class="col-sm">
-                <div class="card mx-auto bg-dark text-white">
+                <div class="card mx-auto bg-dark text-white" >
                     <div class="card-body">
                         <form @submit.prevent="submit">
                                     <div class="form-group">

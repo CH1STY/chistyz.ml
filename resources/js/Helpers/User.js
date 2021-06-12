@@ -3,13 +3,20 @@ import AppStorage from './AppStorage';
 
 class User{
     
+
+    Theme()
+    {
+        return "bg-light text-white"
+    }
+
+
     responseAfterLogin(res){
         const access_token = res.data.access_token;
-        const username = res.data.name;
+        const user = res.data.name
         
         if(Token.isValid(access_token))
         {
-            AppStorage.store(access_token,username);
+            AppStorage.store(access_token,user);
         }
 
     }
@@ -19,6 +26,7 @@ class User{
         const storeToken = localStorage.getItem('token');
         if(storeToken)
         {
+            
             return Token.isValid(storeToken)? true: false;
 
         }
@@ -27,7 +35,7 @@ class User{
 
     loggedIn()
     {
-        return this.hasToken();
+            return this.hasToken();
     }
 
     logout()
@@ -40,6 +48,16 @@ class User{
         if(this.loggedIn())
         {
             return localStorage.getItem('user');
+        }
+        return false;
+    }
+
+    user_id()
+    {
+        if(this.loggedIn())
+        {
+            let user = localStorage.getItem('user');
+            return user.user_id;
         }
         return false;
     }
@@ -67,7 +85,7 @@ class User{
         
 
         const data = await response.data;
-        localStorage.setItem('user',data.name);
+        localStorage.setItem('user',(data.name));
         if(data.name=='admin')
         {
             return true;

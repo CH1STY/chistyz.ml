@@ -1,6 +1,11 @@
 require('./bootstrap');
 import Vue from  'vue';
 
+
+
+
+
+
 //Importing Pagination
 Vue.component('pagination', require('laravel-vue-pagination'));
 //
@@ -60,7 +65,10 @@ window.Toast = Toast;
 
 //--End of Sweet Alert--------
 
+//Theme Control
 
+
+//
 
 
 Vue.config.productionTip =false;
