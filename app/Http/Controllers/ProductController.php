@@ -90,7 +90,7 @@ class ProductController extends Controller
                 'stock' => 'required|numeric|min:0|max:9999',
                 'categories' => 'required|array|between:1,3',
                 'categories.*' => 'exists:categories,category_id',
-                'image' => 'required|mimes:jpg,jpeg,png,bmp,tiff|max:5120'
+                'image' => 'required|mimes:jpg,jpeg,png,bmp,tiff,webp|max:5120'
             ],
             $messages = [
                 'image.max'   => 'Image should be less than 5 MB'
@@ -213,7 +213,7 @@ class ProductController extends Controller
             if($request->image)
             {
                 $imageValidator  = $request->validate([
-                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff|max:5120',
+                    'image' => 'mimes:jpg,jpeg,png,bmp,tiff,webp|max:5120',
                 ],
                 $messages = [
                     'image.max'   => 'Image should be less than 5 MB'
