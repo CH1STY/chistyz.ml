@@ -84,7 +84,7 @@ class ProductController extends Controller
         {
 
             $valid = $request->validate([
-                'name' => 'required|min:4|max:10|regex:/^[\pL\s\-]+$/u|unique:products,name',
+                'name' => 'required|min:4|max:15|regex:/^[\pL\s\-]+$/u|unique:products,name',
                 'details' =>'required|min:10|max:500',
                 'price' => 'required|numeric|min:0|max:99999999',
                 'stock' => 'required|numeric|min:0|max:9999',
