@@ -15,12 +15,20 @@ let addProduct = require('./components/Product/productAdd').default;
 let viewProduct = require('./components/Product/productView').default;
 let editProduct = require('./components/Product/productEdit').default;
 let editProfile = require('./components/User/profileEdit').default;
+let searchProduct = require('./components/Product/productSearch').default;
 const routes = 
     [
         { 
             path: '/', 
             component: home ,
             name: 'home' 
+        },
+        {
+            path:'/product/search',
+            component: searchProduct,
+            name: 'productSearch',
+            props: route=>({query: route.query.q})
+
         },
         { 
             path: '/dashboard', 

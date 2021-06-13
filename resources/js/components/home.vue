@@ -52,6 +52,15 @@
 
             </div>
         </section>
+        <!--GALLERY CONTAINER -->
+
+        <div class="container-fluid">
+            <div class="card-header m-10">
+                <h3 class="text-center">Our Products</h3>
+            </div>            
+            <gallery v-bind:isHome="true"/>
+        </div>
+        <!--GALLERY CONTAINER -->
 
         <footer>
             <p>CopyRightz By Chisty</p>
@@ -61,13 +70,12 @@
 </template>
 
 <script>
+    import productGallery from './Product/productGallery.vue';
     export default{
         
         beforeCreate()
         {
-            // axios.get('api/home-carousel')
-            // .then(res=>this.slider_images= res.data)
-            // .catch(error=>console.log(error))
+           
         },
         data(){
             return{
@@ -75,7 +83,7 @@
             }
         },
         components:{
-            
+            gallery: productGallery,
         },
     }
     

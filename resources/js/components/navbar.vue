@@ -52,9 +52,11 @@
               <div class="form-inline my-2 my-lg-0">
                 <router-link :to="{name:'dashboard'}"><button  class="btn btn-outline-info my-2 mr-2 my-sm-0" type="submit">Profile</button></router-link>
               </div>
-              <div class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <div  class="form-inline my-2 my-lg-0">
+                
+                <input v-model="searchText" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <router-link  :to="{name:'productSearch', query:{q:this.searchText}}" class="btn btn-outline-success my-2 my-sm-0" >Search</router-link>
+               
               </div>
             </div>
           </nav>
@@ -75,8 +77,16 @@
       return{
         isLoggedIn: User.loggedIn(),
         isAdmin : null,
+        searchText: "",
       }
     },
+    methods:{
+      /*doSearch()
+      {
+        this.$router.push({name:'productSearch', query:{q:this.searchText}});
+
+      }*/
+    }
   }
    
 

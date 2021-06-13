@@ -30,6 +30,24 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        if($request->ppp)
+        {
+            if(intval($productPerPage = $request->ppp))
+            {
+
+            }
+            else
+            {
+
+                $productPerPage = 5;
+            }
+            
+
+        }
+        else
+        {
+            $productPerPage = 5;
+        }
         $searchText = $request->search;
         $product = Product::with('categories')
                             ->where('product_id', 'LIKE', '%'.$request->search.'%')
@@ -40,7 +58,7 @@ class ProductController extends Controller
                                 $query->where('name', 'LIKE', '%'.$searchText.'%');
                             })                            
                             ->orderBy('created_at','desc')
-                            ->paginate(5);
+                            ->paginate($productPerPage);
         return response()->json($product);
     }
 
@@ -66,7 +84,7 @@ class ProductController extends Controller
         {
 
             $valid = $request->validate([
-                'name' => 'required|min:4|max:15|regex:/^[\pL\s\-]+$/u|unique:products,name',
+                'name' => 'required|min:4|max:10|regex:/^[\pL\s\-]+$/u|unique:products,name',
                 'details' =>'required|min:10|max:500',
                 'price' => 'required|numeric|min:0|max:99999999',
                 'stock' => 'required|numeric|min:0|max:9999',

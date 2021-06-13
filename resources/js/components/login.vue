@@ -1,7 +1,7 @@
 <template>
     <div >
             <navbar></navbar>
-            <div class="card mx-auto bg-dark text-white" style="width: 80%;">
+            <div class="card mx-auto bg-dark text-white width-control" >
             <div class="card-body">
                 <h1>Login </h1>
                 <form @submit.prevent="login">
@@ -87,5 +87,9 @@
 h1{
     text-transform: uppercase;
     text-align: center;
+}
+
+.width-control{
+    width: 40%;
 }
 </style>

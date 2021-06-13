@@ -60,7 +60,7 @@
             <div class="col-sm">
                 <div class="card mx-auto bg-dark text-white overflow-auto" style="min-height:30rem;">
                     <div class="card-body">
-                        <h4 class="text-center">Product List <router-link class="h6 float-right" to="/admin/viewProduct">Click Here to Manage Product</router-link> </h4>
+                        <h4 class="text-center">Product List <router-link class="h6 float-right" to="/viewProduct">Click Here to Manage Product</router-link> </h4>
                         <table class="table bg-dark text-white">
                             <thead>
                                 <tr>
