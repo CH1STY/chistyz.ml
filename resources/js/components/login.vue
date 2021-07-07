@@ -90,6 +90,14 @@ h1{
 }
 
 .width-control{
-    width: 40%;
+    width: 50%;
 }
+
+@media screen and (max-width: 600px) {
+  .width-control {
+    width: 75%;
+  }
+}
+
+
 </style>

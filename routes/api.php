@@ -63,6 +63,7 @@ Route::post('password-reset/confirm','PasswordController@passwordResetVerify');
 Route::get('token-validation/{token}','PasswordController@tokenValidate');
 
 Route::get('home-carousel','HomeController@getCarousel');
-
+Route::get('random-product/{pid}','HomeController@getRandom');
 Route::get('client-ip','HomeController@getIp');
+Route::post('getCartData','CartController@getCartItem');
 

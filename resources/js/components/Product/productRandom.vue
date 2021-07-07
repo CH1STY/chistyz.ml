@@ -1,78 +1,38 @@
 <template>
     <div>
-        <div class="container-sm">
-            <form v-if="!isHome"  @submit.prevent="getProduct()">     
-                <div class="input-group mb-3 ">
-                    <input v-model="searchText"  type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Enter Product to Search">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-info"  id="inputGroup-sizing-default">Search</button>
-                    </div>
-                </div>                            
-            </form>
-        </div>
+        <div class="card-header mt-20"> <h1>More Products</h1> </div>
         <div v-if="isProduct" class="gallery">
-                <div v-for="product in products.data" :key="product.product_id" class="content">
+                <div v-for="product in products" :key="product.product_id" class="content">
                     <productCard :image=product.image :name=product.name :price=product.price :product_id=product.product_id />
                 </div>
-            
         </div>
-            <h1 v-else class="text-center">No Product Found </h1>
-        <div v-if="isHome" class="card-footer" style="display:flex;justify-content:center; margin:10px;">
-            <router-link :to="{name:'productSearch', query:{q:''}}">View All</router-link>
-        </div>
-        <div v-else class="card-footer" style="display:flex;justify-content:center; margin:10px;">
-            <pagination :data="products" @pagination-change-page="getProduct">
-                               
-            </pagination>
-        </div>
-
     </div>
 </template>
 
 <script>
-    import productSingle from './productSingle.vue';
+import productSingle from './productSingle.vue';
 export default {
     components:{
         productCard : productSingle,
     },
-    created()
+    beforeMount()
     {
-        this.searchText = this.$route.query.q;
         this.getProduct();
 
     },
-    props:['isHome'],
-    data ()
+    data()
     {
-        return {
-            products: {},
-            isProduct : false,
-            searchText: "",
-            ppp :20,
-        }
-
-    },
-    watch:{
-        $route(query){
-            this.searchText=query.query.q;
-            this.getProduct();
-
-        }
+      return{
+          products : {},
+          isProduct : false,
+      }
     },
     methods:{
-        getProduct(page=1)
-            {
-                if(this.isHome)
-                {
-                    this.ppp = 9;
-                }
-                else
-                {
-                    
-                }
-                axios({
+        getProduct()
+        {
+               axios({
                     method: 'get',
-                    url: `/api/admin/product?page=${page}&search=${this.searchText || ""}&ppp=${this.ppp}`,
+                    url: `/api/random-product/${this.$route.params.productId}`,
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')} `
                     }
@@ -80,16 +40,19 @@ export default {
                 .then(res=>
                     {
                         this.products=res.data
-                        if(this.products.data.length>0)
+                     
+                        if(this.products.length>0)
                         {
                             this.isProduct = true;
                         }
                     }
                 )
-            }    
-    }
-}
+        }
+    },
 
+
+         
+}
 </script>
 
 <style scoped>

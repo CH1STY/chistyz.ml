@@ -13,9 +13,11 @@ let forget_pass = require('./components/ForgetPass/forget-pass').default;
 let reset_pass = require('./components/ForgetPass/reset-pass').default;
 let addProduct = require('./components/Product/productAdd').default;
 let viewProduct = require('./components/Product/productView').default;
+let productDetails = require('./components/Product/productDetails').default;
 let editProduct = require('./components/Product/productEdit').default;
 let editProfile = require('./components/User/profileEdit').default;
 let searchProduct = require('./components/Product/productSearch').default;
+let cart = require('./components/Cart/cart').default;
 const routes = 
     [
         { 
@@ -69,6 +71,16 @@ const routes =
             path : '/viewProduct',
             component : viewProduct,
             name : 'viewProduct',
+        },
+        {
+            path : '/details/:productId',
+            component : productDetails,
+            name : 'details',
+        },
+        {
+            path : '/cart',
+            component : cart,
+            name : 'cart',
         },
         {
             path : '/admin/editProduct/:productId',

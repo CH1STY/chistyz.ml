@@ -93,7 +93,8 @@ class ProductController extends Controller
                 'image' => 'required|mimes:jpg,jpeg,png,bmp,tiff|max:5120'
             ],
             $messages = [
-                'image.max'   => 'Image should be less than 5 MB'
+                'image.max'   => 'Image should be less than 5 MB',
+                'name.required' => 'name is mandatory',
             ]);
     
             $nextProductId = Product::orderBy('product_id','desc')->first();
@@ -167,7 +168,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        if($this->guard()->user()->name =='admin')
+        if(1)
         {
             $product = Product::with('categories')->where('product_id',$id)->first();
             return response()->json($product);

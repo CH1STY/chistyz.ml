@@ -39,7 +39,7 @@
                 form:{
                     email: "",
                 },
-                errors:{},
+                errors:{ email: [],},
                 notSubmitted: true,
                 pressed:false,
             }
