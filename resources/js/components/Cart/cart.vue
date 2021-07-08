@@ -290,7 +290,7 @@ export default {
         padding: 5px;
     }
     input[type=number] {
-        background-color: #227DC7;
+        background-color: #ffffff;
         border: 2px solid rgb(77, 77, 77);
         border-radius: 4px;
     }

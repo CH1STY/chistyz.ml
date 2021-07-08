@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <router-link   class="navbar-brand" to="/">CMS</router-link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button"  v-on:click="toggleOutCartVis()" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
           
@@ -29,13 +29,7 @@
                     <router-link class=" text-secondary dropdown-item bg-dark" to="/admin/viewCat">View Category</router-link>
                   </div>
                 </li>
-                <li class="nav-item">
-                    <router-link v-if="isLoggedIn && !isAdmin" class="nav-link" to="/admin/viewCat">View Category</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link v-if="isLoggedIn && !isAdmin" class="nav-link" to="/viewProduct">View Product</router-link>
-                </li>
-                  
+           
                 <li v-if="isLoggedIn" class="nav-item dropdown">
                   <span class="nav-link dropdown-toggle" to="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Apps
@@ -55,7 +49,7 @@
                     <router-link class="nav-link" to="/register">Register</router-link>
                   </li>
                   <li>
-                    <router-link  class="nav-link tooltipBase" to="/cart"> <span :class="cart.itemCount==''? '':'highlight'" >  <i  class="fas fa-shopping-cart cart"><sup class="cartText">{{ cart.itemCount }}</sup></i> </span></router-link>
+                    <router-link  class="nav-link " to="/cart"> <span :class="cart.itemCount==''? '':'highlight'" >  <i  class="fas fa-shopping-cart cart"><sup class="cartText">{{ cart.itemCount }}</sup></i> </span></router-link>
                   </li>
 
               </ul>
@@ -73,7 +67,7 @@
 
             </div>
 
-            <router-link class="rightSide"  to="/cart"> <span class="nav-link" :class="cart.itemCount==''? '':'highlight'" >  <i  class="fas fa-shopping-cart cart"><sup class="cartText">{{ cart.itemCount }}</sup></i> </span></router-link>
+            <router-link class="rightSide" v-if="outCart"  to="/cart"> <span class="nav-link" :class="cart.itemCount==''? '':'highlight'" >  <i  class="fas fa-shopping-cart cart"><sup class="cartText">{{ cart.itemCount }}</sup></i> </span></router-link>
 
 
             
@@ -100,7 +94,8 @@
         searchText: "",
         cart: {
           itemCount : '',
-        }
+        },
+        outCart : true,
       }
     },
     methods:{
@@ -109,6 +104,20 @@
         this.$router.push({name:'productSearch', query:{q:this.searchText}});
 
       }*/
+
+      toggleOutCartVis()
+      {
+        if(this.outCart==true)
+        { 
+          this.outCart = false;
+
+        }
+        else
+        {
+          this.outCart = true;
+        }
+      },
+      
       
       removeFromCart(product_id)
       {

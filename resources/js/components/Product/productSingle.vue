@@ -10,7 +10,7 @@
         <li><i class="fa fa-star" aria-hidden="true"></i></li>
         <li><i class="fa fa-star" aria-hidden="true"></i></li>
         </ul>
-        <router-link :to="{name:'details', params:{productId:`${product_id}`}}"><button class="button buy-2">View Details</button></router-link>
+        <router-link  :to="{name:'details', params:{productId:`${product_id}`}}"><button v-on:click="goTop()" class="button buy-2">View Details</button></router-link>
     </div>
 </template>
 
@@ -24,7 +24,10 @@ export default {
     },
 
     methods:{
-       
+       goTop()
+       {  
+          window.scrollTo(0,-1000);
+       }
     }
 }
 </script>

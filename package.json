@@ -35,6 +35,7 @@
     "sass-loader": "^10.0.2",
     "vue": "^2.6.13",
     "vue-cli-plugin-bootstrap-vue": "~0.7.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vueperslides": "^2.15.1"
   }
 }

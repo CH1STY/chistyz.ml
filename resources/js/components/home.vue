@@ -1,29 +1,17 @@
 <template>
     <div>
         <navbar/>
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                <div class="carousel-caption d-none d-md-block">              
-                </div>
-                <img class="d-block w-100" src="asset/sliders/slider1.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                <img class="d-block w-100" src="asset/sliders/slider2.jpg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                <img class="d-block w-100" src="asset/sliders/slider3.jpg" alt="Third slide">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+        <vueper-slides  autoplay fade  >
+            <vueper-slide v-for="(slide) in slides"
+                :key="slide.id"
+                :image="slide.image"
+                :title="slide.title"
+                :content="slide.content" 
+                />
+            <template v-slot:pause>
+                <i class="icon pause_circle_outline"></i>
+            </template>
+        </vueper-slides>
         <section id="about" class="about">
             <div class="container">
 
@@ -71,6 +59,8 @@
 
 <script>
     import productGallery from './Product/productGallery.vue';
+    import { VueperSlides, VueperSlide } from 'vueperslides';
+    import 'vueperslides/dist/vueperslides.css';
     export default{
         
         beforeCreate()
@@ -79,11 +69,30 @@
         },
         data(){
             return{
-                slider_images: [],
+                slides: [
+                    {
+                        title:'<h4 style="text-transform:uppercase;color:#D3D5DA;position:absolute;top:0;right:2px">Bridge</h4>',
+                        image: 'asset/sliders/slider1.jpg',
+                        
+                    },
+                    {
+                        title:'<h4 style="text-transform:uppercase;color:#D3D5DA;position:absolute;top:0;right:2px">Monument</h4>',
+                        image: 'asset/sliders/slider2.jpg',
+                        
+                    },
+                    {
+                        title:'<h4 style="text-transform:uppercase;color:#D3D5DA;position:absolute;top:0;right:2px">Snow</h4>',
+                        image: 'asset/sliders/slider3.jpg',
+                        
+                    },
+                 
+                ]
             }
         },
         components:{
+            VueperSlides,VueperSlide,
             gallery: productGallery,
+
         },
     }
     
@@ -91,6 +100,7 @@
 </script>
 
 <style scoped>
+
 
 
 .neonText {
