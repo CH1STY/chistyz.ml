@@ -15,6 +15,7 @@ Route::group([
 
 
 
+
 });
 
 Route::group([
@@ -48,12 +49,12 @@ Route::group([
     Route::post('addTodo','UserController@addTodo');
     Route::get('getTodo','UserController@getTodo');
     Route::post('deleteTodo/{id}','UserController@deleteTodo');
-    
+
     Route::get('getUserId','UserController@getUserId');
     Route::get('getUserDetails','UserController@getUserDetails');
     Route::post('updateProfilePic','UserController@updateProfilePic');
     Route::post('updateProfile','UserController@updateProfile');
-    
+
 
 
 });
@@ -67,3 +68,4 @@ Route::get('random-product/{pid}','HomeController@getRandom');
 Route::get('client-ip','HomeController@getIp');
 Route::post('getCartData','CartController@getCartItem');
 
+Route::get('ytdl/{url}','YoutubeDownloader@youtubeGetAudio');

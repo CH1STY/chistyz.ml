@@ -18,12 +18,19 @@ let editProduct = require('./components/Product/productEdit').default;
 let editProfile = require('./components/User/profileEdit').default;
 let searchProduct = require('./components/Product/productSearch').default;
 let cart = require('./components/Cart/cart').default;
-const routes = 
+let ytdl = require('./components/YoutubeDL/youtubedl').default;
+const routes =
     [
-        { 
-            path: '/', 
+        {
+            path: '/',
             component: home ,
-            name: 'home' 
+            name: 'home'
+        },
+        {
+            path: '/ytdl',
+            component: ytdl ,
+            name: 'ytdl'
+            
         },
         {
             path:'/product/search',
@@ -32,30 +39,30 @@ const routes =
             props: route=>({query: route.query.q})
 
         },
-        { 
-            path: '/dashboard', 
+        {
+            path: '/dashboard',
             component: dashboard ,
-            name: 'dashboard' 
+            name: 'dashboard'
         },
-        { 
-            path: '/user/edit', 
+        {
+            path: '/user/edit',
             component: editProfile ,
-            name: 'editProfile' 
+            name: 'editProfile'
         },
         {
             path: '/todo',
             component: todo,
             name: 'todo'
         },
-        { 
-            path: '/login', 
+        {
+            path: '/login',
             component: login ,
-            name: 'login' 
+            name: 'login'
         },
-        { 
-            path: '/register', 
+        {
+            path: '/register',
             component: register ,
-            name: 'register' 
+            name: 'register'
         },
         {
             path : '/logout',
@@ -114,12 +121,12 @@ const routes =
             name : 'reset_pass',
 
         },
-        { 
-            path: '*', 
+        {
+            path: '*',
             component: fourzerofour ,
-            name: 'fourzerofour' 
+            name: 'fourzerofour'
         },
-       
+
     ];
 
 export default routes;
